@@ -13,6 +13,9 @@ class GhostscriptConverterTest extends PHPUnit_Framework_TestCase
     protected function setUp()
     {
         $this->tmp = __DIR__.'/../files/stage/';
+
+        if (!file_exists($this->tmp))
+            mkdir($this->tmp);
     }
 
     protected function tearDown()

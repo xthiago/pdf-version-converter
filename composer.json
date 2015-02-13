@@ -3,7 +3,7 @@
     "description": "PHP library for converting the version of PDF files (for compatibility purposes).",
     "license": "MIT",
     "type": "library",
-    "minimum-stability" : "dev",
+    "minimum-stability" : "stable",
     "authors": [
         {
             "name": "Thiago Rodrigues",

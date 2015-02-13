@@ -29,6 +29,9 @@ class RegexGuesserTest extends PHPUnit_Framework_TestCase
         $this->tmpDir = __DIR__.'/../files/repo/';
         $this->stageDir = __DIR__.'/../files/stage/';
 
+        if (!file_exists($this->stageDir))
+            mkdir($this->stageDir);
+
         foreach(self::$files as $file) {
             if (!copy($this->tmpDir . $file, $this->stageDir . $file))
                 throw new \RuntimeException("Can't create test file.");
