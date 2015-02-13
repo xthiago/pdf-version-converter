@@ -1,4 +1,4 @@
-# PDF version converter
+# PDF version converter [![Build Status](https://travis-ci.org/xthiago/pdf-version-converter.svg?branch=master)](https://travis-ci.org/xthiago/pdf-version-converter)
 PHP library for converting the version of PDF files (for compatibility purposes).
 
 **This lib is under initial development.**
