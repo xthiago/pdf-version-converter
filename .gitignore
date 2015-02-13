@@ -1,0 +1,6 @@
+composer.phar
+.idea
+.vagrant
+vendor/*
+tests/files/stage/*
+tests/files/tmp/*
