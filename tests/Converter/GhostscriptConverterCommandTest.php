@@ -52,7 +52,7 @@ class GhostscriptConverterCommandTest extends PHPUnit_Framework_TestCase
      * @param string $file
      * @param $newVersion
      *
-     * @dataProvider testFilesProvider
+     * @dataProvider filesProvider
      */
     public function testMustConvertPDFVersionWithSuccess($file, $newVersion)
     {
@@ -75,7 +75,7 @@ class GhostscriptConverterCommandTest extends PHPUnit_Framework_TestCase
      * @param string $invalidFile
      * @param $newVersion
      *
-     * @dataProvider testInvalidFilesProvider
+     * @dataProvider invalidFilesProvider
      * @expectedException RuntimeException
      */
     public function testMustThrowException($invalidFile, $newVersion)
@@ -98,7 +98,7 @@ class GhostscriptConverterCommandTest extends PHPUnit_Framework_TestCase
     /**
      * @return array
      */
-    public static function testFilesProvider()
+    public static function filesProvider()
     {
         return array(
             // file, new version
@@ -115,7 +115,7 @@ class GhostscriptConverterCommandTest extends PHPUnit_Framework_TestCase
     /**
      * @return array
      */
-    public static function testInvalidFilesProvider()
+    public static function invalidFilesProvider()
     {
         return array(
             // file, new version

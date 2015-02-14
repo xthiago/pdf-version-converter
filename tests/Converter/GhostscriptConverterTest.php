@@ -26,7 +26,7 @@ class GhostscriptConverterTest extends PHPUnit_Framework_TestCase
      * @param string $file
      * @param $newVersion
      *
-     * @dataProvider testFilesProvider
+     * @dataProvider filesProvider
      */
     public function testMustConvertPDFVersionWithSuccess($file, $newVersion)
     {
@@ -65,7 +65,7 @@ class GhostscriptConverterTest extends PHPUnit_Framework_TestCase
     /**
      * @return array
      */
-    public static function testFilesProvider()
+    public static function filesProvider()
     {
         return array(
             // file, new version

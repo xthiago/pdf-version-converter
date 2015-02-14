@@ -49,7 +49,7 @@ class RegexGuesserTest extends PHPUnit_Framework_TestCase
      * @param string $file
      * @param string $expectedVersion
      *
-     * @dataProvider testFilesProvider
+     * @dataProvider filesProvider
      */
     public function testMustReturnRightVersion($file, $expectedVersion)
     {
@@ -62,7 +62,7 @@ class RegexGuesserTest extends PHPUnit_Framework_TestCase
     /**
      * @param string $file
      *
-     * @dataProvider testInvalidFilesProvider
+     * @dataProvider invalidFilesProvider
      * @expectedException RuntimeException
      */
     public function testMustThrowException($file)
@@ -74,7 +74,7 @@ class RegexGuesserTest extends PHPUnit_Framework_TestCase
     /**
      * @return array
      */
-    public static function testFilesProvider()
+    public static function filesProvider()
     {
         return array(
             // file, current version
@@ -93,7 +93,7 @@ class RegexGuesserTest extends PHPUnit_Framework_TestCase
     /**
      * @return array
      */
-    public static function testInvalidFilesProvider()
+    public static function invalidFilesProvider()
     {
         $stageDir = __DIR__.'/../files/stage/';
 
