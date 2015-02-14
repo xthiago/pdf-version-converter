@@ -25,7 +25,7 @@ class RegexGuesser implements GuesserInterface
 
     /**
      * This implementation is not the best, but doesn't require external modules or libs. For now, works fine for me.
-     * @author Sameer Borate http://www.codediesel.com/php/read-the-version-of-a-pdf-in-php/
+     * Inspired by Sameer Borate's snippet http://www.codediesel.com/php/read-the-version-of-a-pdf-in-php/
      * @param $filename
      * @return string|null
      */
@@ -40,13 +40,13 @@ class RegexGuesser implements GuesserInterface
         /* Reset file pointer to the start */
         fseek($fp, 0);
 
-        /* Read 20 bytes from the start of the PDF */
-        preg_match('/\d\.\d/',fread($fp,20),$match);
+        /* Read 1024 bytes from the start of the PDF */
+        preg_match('/%PDF-(\d\.\d)/', fread($fp,1024), $match);
 
         fclose($fp);
 
-        if (isset($match[0]))
-            return $match[0];
+        if (isset($match[1]))
+            return $match[1];
 
         return null;
     }
