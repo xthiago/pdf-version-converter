@@ -3,8 +3,6 @@
 namespace Xthiago\PDFVersionConverter\Converter;
 
 use Symfony\Component\Filesystem\Filesystem;
-use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
-use Symfony\Component\Process\Process;
 
 class GhostscriptConverter implements ConverterInterface
 {
