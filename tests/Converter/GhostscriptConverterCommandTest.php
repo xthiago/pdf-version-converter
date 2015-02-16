@@ -1,10 +1,21 @@
 <?php
 
+/*
+ * This file is part of the PDF Version Converter.
+ *
+ * (c) Thiago Rodrigues <xthiago@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 namespace Xthiago\PDFVersionConverter\Converter;
 
 use \PHPUnit_Framework_TestCase;
 use Xthiago\PDFVersionConverter\Guesser\RegexGuesser;
 
+/**
+ * @author Thiago Rodrigues <xthiago@gmail.com>
+ */
 class GhostscriptConverterCommandTest extends PHPUnit_Framework_TestCase
 {
     protected $tmp;

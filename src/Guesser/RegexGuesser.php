@@ -1,24 +1,33 @@
 <?php
 
+/*
+ * This file is part of the PDF Version Converter.
+ *
+ * (c) Thiago Rodrigues <xthiago@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 namespace Xthiago\PDFVersionConverter\Guesser;
 
 use \RuntimeException;
 
+/**
+ * Guesser that reads the first 1024 bytes of given PDF file and try find the version with regular expression (regex).
+ *
+ * @author Thiago Rodrigues <xthiago@gmail.com>
+ */
 class RegexGuesser implements GuesserInterface
 {
     /**
-     * Guess the PDF version of given file.
-     *
-     * @param string $file aboslute path of PDF
-     * @return string version (1.4, 1.5, 1.6).
-     * @throws RuntimeException if version can't be guessed.
+     * {@inheritdoc }
      */
     public function guess($file)
     {
         $version = $this->guessVersion($file);
 
         if ($version === null)
-            throw new RuntimeException("Can't guess version. {$file} is a PDF file?");
+            throw new RuntimeException("Can't guess version. The file '{$file}' is a PDF file?");
 
         return $version;
     }

@@ -1,6 +1,7 @@
 {
     "name": "xthiago/pdf-version-converter",
     "description": "PHP library for converting the version of PDF files (for compatibility purposes).",
+    "keywords": ["pdf", "converter", "version converter", "pdf version converter", "pdf version"],
     "license": "MIT",
     "type": "library",
     "minimum-stability" : "stable",
