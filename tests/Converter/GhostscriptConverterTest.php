@@ -48,7 +48,8 @@ class GhostscriptConverterTest extends PHPUnit_Framework_TestCase
         ;
         $fs->copy(
                 Argument::type('string'),
-                $file
+                $file,
+                true
             )
             ->willReturn(true)
             ->shouldBeCalled()
