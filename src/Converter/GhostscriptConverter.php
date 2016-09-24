@@ -45,8 +45,9 @@ class GhostscriptConverter implements ConverterInterface
         $this->command = $command;
         $this->fs = $fs;
 
-        if ($tmp)
-            $this->$tmp = $tmp;
+        if ($tmp) {
+            $this->tmp = $tmp;
+        }
     }
 
     /**
