@@ -30,7 +30,7 @@ class GhostscriptConverterCommand
 
     public function run($originalFile, $newFile, $newVersion)
     {
-        $command = sprintf($this->baseCommand, $newVersion, $newFile, $originalFile);
+        $command = sprintf($this->baseCommand, $newVersion, $newFile, escapeshellarg($originalFile));
 
         $process = new Process($command);
         $process->run();
