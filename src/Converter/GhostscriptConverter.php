@@ -33,7 +33,7 @@ class GhostscriptConverter implements ConverterInterface
      * Directory where temporary files are stored.
      * @var string
      */
-    protected $tmp = sys_get_temp_dir();
+    protected $tmp;
 
     /**
      * @param GhostscriptConverterCommand $command
@@ -44,10 +44,7 @@ class GhostscriptConverter implements ConverterInterface
     {
         $this->command = $command;
         $this->fs = $fs;
-
-        if ($tmp) {
-            $this->tmp = $tmp;
-        }
+        $this->tmp = empty($tmp)?sys_get_temp_dir():$tmp;
     }
 
     /**
