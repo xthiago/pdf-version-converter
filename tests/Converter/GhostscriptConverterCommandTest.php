@@ -70,8 +70,6 @@ class GhostscriptConverterCommandTest extends PHPUnit_Framework_TestCase
     {
         $tmpFile = $this->tmp .'/'. uniqid('pdf_version_changer_test_') . '.pdf';
 
-        echo "$tmpFile \n";
-
         $command = new GhostscriptConverterCommand();
         $command->run(
             $file,
