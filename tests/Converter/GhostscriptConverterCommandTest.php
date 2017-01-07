@@ -32,6 +32,7 @@ class GhostscriptConverterCommandTest extends PHPUnit_Framework_TestCase
         'v1.6.pdf',
         'v1.7.pdf',
         'v2.0.pdf',
+        'v2.0 filename with "Sp3ci4l"; <\'Ch4r5\'> !£$%&()=?^[]{}è@#§.pdf',
     );
 
     protected function setUp()
@@ -68,6 +69,8 @@ class GhostscriptConverterCommandTest extends PHPUnit_Framework_TestCase
     public function testMustConvertPDFVersionWithSuccess($file, $newVersion)
     {
         $tmpFile = $this->tmp .'/'. uniqid('pdf_version_changer_test_') . '.pdf';
+
+        echo "$tmpFile \n";
 
         $command = new GhostscriptConverterCommand();
         $command->run(
