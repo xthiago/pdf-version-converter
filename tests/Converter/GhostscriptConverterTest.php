@@ -87,7 +87,9 @@ class GhostscriptConverterTest extends PHPUnit_Framework_TestCase
             array(__DIR__ . '/../files/stage/v1.4.pdf', '1.4'),
             array(__DIR__ . '/../files/stage/v1.5.pdf', '1.4'),
             array(__DIR__ . '/../files/stage/v1.6.pdf', '1.4'),
+            array(__DIR__ . '/../files/stage/v1.7 filename with "Sp3ci4l"; <\'Ch4r5\'> !£$%&()=?^[]{}è@#§.pdf', '1.4'),
             array(__DIR__ . '/../files/stage/v1.7.pdf', '1.4'),
+            array(__DIR__ . '/../files/stage/v2.0.pdf', '1.4'),
         );
     }
 }
