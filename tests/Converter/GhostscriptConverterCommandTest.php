@@ -33,7 +33,6 @@ class GhostscriptConverterCommandTest extends PHPUnit_Framework_TestCase
         'v1.7 filename with "Sp3ci4l"; <\'Ch4r5\'> !£$%&()=?^[]{}è@#§.pdf',
         'v1.7.pdf',
         'v2.0.pdf',
-        'v2.0 filename with "Sp3ci4l"; <\'Ch4r5\'> !£$%&()=?^[]{}è@#§.pdf',
     );
 
     protected function setUp()
