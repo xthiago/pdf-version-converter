@@ -61,4 +61,4 @@ Is really simple add new implementation of guesser or converter , just implement
 
 ## Running unit tests
 
-Run `phpunit -c /tests`.
+Run `phpunit -c tests`.
