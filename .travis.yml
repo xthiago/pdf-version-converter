@@ -29,6 +29,56 @@ matrix:
   include:
     - php: 5.3
       dist: precise
+      env: SYMFONY_COMPONENTS_VERSION=2.3.*
+    - php: 5.3
+      dist: precise
+      env: SYMFONY_COMPONENTS_VERSION=2.4.*
+    - php: 5.3
+      dist: precise
+      env: SYMFONY_COMPONENTS_VERSION=2.5.*
+    - php: 5.3
+      dist: precise
+      env: SYMFONY_COMPONENTS_VERSION=2.6.*
+    - php: 5.3
+      dist: precise
+      env: SYMFONY_COMPONENTS_VERSION=2.7.*
+    - php: 5.3
+      dist: precise
+      env: SYMFONY_COMPONENTS_VERSION=2.8.*
+    - php: 5.4
+      env: SYMFONY_COMPONENTS_VERSION=2.3.*
+    - php: 5.4
+      env: SYMFONY_COMPONENTS_VERSION=2.4.*
+    - php: 5.4
+      env: SYMFONY_COMPONENTS_VERSION=2.5.*
+    - php: 5.4
+      env: SYMFONY_COMPONENTS_VERSION=2.6.*
+    - php: 5.4
+      env: SYMFONY_COMPONENTS_VERSION=2.7.*
+    - php: 5.4
+      env: SYMFONY_COMPONENTS_VERSION=2.8.*
+    - php: 5.5
+      env: SYMFONY_COMPONENTS_VERSION=2.3.*
+    - php: 5.5
+      env: SYMFONY_COMPONENTS_VERSION=2.4.*
+    - php: 5.5
+      env: SYMFONY_COMPONENTS_VERSION=2.5.*
+    - php: 5.5
+      env: SYMFONY_COMPONENTS_VERSION=2.6.*
+    - php: 5.5
+      env: SYMFONY_COMPONENTS_VERSION=2.7.*
+    - php: 5.5
+      env: SYMFONY_COMPONENTS_VERSION=2.8.*
+    - php: 5.5
+      env: SYMFONY_COMPONENTS_VERSION=3.0.*
+    - php: 5.5
+      env: SYMFONY_COMPONENTS_VERSION=3.1.*
+    - php: 5.5
+      env: SYMFONY_COMPONENTS_VERSION=3.2.*
+    - php: 5.5
+      env: SYMFONY_COMPONENTS_VERSION=3.3.*
+    - php: 5.5
+      env: SYMFONY_COMPONENTS_VERSION=3.4.*
   allow_failures:
     - php: hhvm
   fast_finish: true
