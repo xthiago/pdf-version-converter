@@ -1,5 +1,10 @@
 language: php
 
+addons:
+    apt:
+        packages:
+        - ghostscript
+
 env:
   - SYMFONY_COMPONENTS_VERSION=2.3.*
   - SYMFONY_COMPONENTS_VERSION=2.4.*
