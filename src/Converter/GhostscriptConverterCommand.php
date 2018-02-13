@@ -20,14 +20,9 @@ use Symfony\Component\Process\Process;
 class GhostscriptConverterCommand
 {
     /**
-     * @var Filesystem
-     */
-    protected $baseCommand = '%s -sDEVICE=pdfwrite -dCompatibilityLevel=%s -dPDFSETTINGS=/screen -dNOPAUSE -dQUIET -dBATCH -sOutputFile=%s %s';
-
-    /**
      * @var string
      */
-    protected $executable;
+    protected $baseCommand = '%s -sDEVICE=pdfwrite -dCompatibilityLevel=%s -dPDFSETTINGS=/screen -dNOPAUSE -dQUIET -dBATCH -dColorConversionStrategy=/LeaveColorUnchanged -dEncodeColorImages=false -dEncodeGrayImages=false -dEncodeMonoImages=false -dDownsampleMonoImages=false -dDownsampleGrayImages=false -dDownsampleColorImages=false -dAutoFilterColorImages=false -dAutoFilterGrayImages=false -dColorImageFilter=/FlateEncode -dGrayImageFilter=/FlateEncode  -sOutputFile=%s %s';
 
     public function __construct()
     {
@@ -87,7 +82,7 @@ class GhostscriptConverterCommand
 
     public function run($originalFile, $newFile, $newVersion)
     {
-        $command = sprintf($this->baseCommand, $this->getExecutable(), $newVersion, $newFile, $originalFile);
+        $command = sprintf($this->baseCommand, $this->getExecutable(), $newVersion, $newFile, escapeshellarg($originalFile));
 
         $process = new Process($command);
         $process->run();

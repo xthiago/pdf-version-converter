@@ -1,32 +1,185 @@
-# Required to run your project under the correct environment.
 language: php
 
-# Versions of PHP you want your project run with.
-php:
-  - '5.3'
-  - '5.4'
-  - '5.5'
-  - '5.6'
-  - '7.0'
-  - '7.1'
-  - hhvm
+sudo: false
 
-# Commands to be run before your environment runs.
-before_script:
+cache:
+  directories:
+    - $HOME/.composer/cache/files
+
+addons:
+    apt:
+        packages:
+        - ghostscript
+
+before_install:
   - composer self-update
-  - composer install --prefer-source --no-interaction --dev
+  - if [ "$SYMFONY_VERSION" != "" ]; then composer require "symfony/process:${SYMFONY_VERSION}" "symfony/filesystem:${SYMFONY_VERSION}" --no-update; fi;
 
-# Commands you want to run that will verify your build.
-script: phpunit -c tests/
+install:
+  - composer update --prefer-dist
 
-# allow_failures: Allow this build to fail under the specified environments.
-# fast_finish: If your build fails do not continue trying to build, just stop.
+script: ./vendor/bin/phpunit -c tests/ --coverage-text
+
 matrix:
+  include:
+    - php: 5.3
+      dist: precise
+      env: SYMFONY_VERSION=2.3.*
+    - php: 5.3
+      dist: precise
+      env: SYMFONY_VERSION=2.4.*
+    - php: 5.3
+      dist: precise
+      env: SYMFONY_VERSION=2.5.*
+    - php: 5.3
+      dist: precise
+      env: SYMFONY_VERSION=2.6.*
+    - php: 5.3
+      dist: precise
+      env: SYMFONY_VERSION=2.7.*
+    - php: 5.3
+      dist: precise
+      env: SYMFONY_VERSION=2.8.*
+    - php: 5.4
+      env: SYMFONY_VERSION=2.3.*
+    - php: 5.4
+      env: SYMFONY_VERSION=2.4.*
+    - php: 5.4
+      env: SYMFONY_VERSION=2.5.*
+    - php: 5.4
+      env: SYMFONY_VERSION=2.6.*
+    - php: 5.4
+      env: SYMFONY_VERSION=2.7.*
+    - php: 5.4
+      env: SYMFONY_VERSION=2.8.*
+    - php: 5.5
+      env: SYMFONY_VERSION=2.3.*
+    - php: 5.5
+      env: SYMFONY_VERSION=2.4.*
+    - php: 5.5
+      env: SYMFONY_VERSION=2.5.*
+    - php: 5.5
+      env: SYMFONY_VERSION=2.6.*
+    - php: 5.5
+      env: SYMFONY_VERSION=2.7.*
+    - php: 5.5
+      env: SYMFONY_VERSION=2.8.*
+    - php: 5.5
+      env: SYMFONY_VERSION=3.0.*
+    - php: 5.5
+      env: SYMFONY_VERSION=3.1.*
+    - php: 5.5
+      env: SYMFONY_VERSION=3.2.*
+    - php: 5.5
+      env: SYMFONY_VERSION=3.3.*
+    - php: 5.5
+      env: SYMFONY_VERSION=3.4.*
+    - php: 5.6
+      env: SYMFONY_VERSION=2.3.*
+    - php: 5.6
+      env: SYMFONY_VERSION=2.4.*
+    - php: 5.6
+      env: SYMFONY_VERSION=2.5.*
+    - php: 5.6
+      env: SYMFONY_VERSION=2.6.*
+    - php: 5.6
+      env: SYMFONY_VERSION=2.7.*
+    - php: 5.6
+      env: SYMFONY_VERSION=2.8.*
+    - php: 5.6
+      env: SYMFONY_VERSION=3.0.*
+    - php: 5.6
+      env: SYMFONY_VERSION=3.1.*
+    - php: 5.6
+      env: SYMFONY_VERSION=3.2.*
+    - php: 5.6
+      env: SYMFONY_VERSION=3.3.*
+    - php: 5.6
+      env: SYMFONY_VERSION=3.4.*
+    - php: 7.0
+      env: SYMFONY_VERSION=2.3.*
+    - php: 7.0
+      env: SYMFONY_VERSION=2.4.*
+    - php: 7.0
+      env: SYMFONY_VERSION=2.5.*
+    - php: 7.0
+      env: SYMFONY_VERSION=2.6.*
+    - php: 7.0
+      env: SYMFONY_VERSION=2.7.*
+    - php: 7.0
+      env: SYMFONY_VERSION=2.8.*
+    - php: 7.0
+      env: SYMFONY_VERSION=3.0.*
+    - php: 7.0
+      env: SYMFONY_VERSION=3.1.*
+    - php: 7.0
+      env: SYMFONY_VERSION=3.2.*
+    - php: 7.0
+      env: SYMFONY_VERSION=3.3.*
+    - php: 7.0
+      env: SYMFONY_VERSION=3.4.*
+    - php: 7.1
+      env: SYMFONY_VERSION=3.4.*
+    - php: 7.1
+      env: SYMFONY_VERSION=2.3.*
+    - php: 7.1
+      env: SYMFONY_VERSION=2.4.*
+    - php: 7.1
+      env: SYMFONY_VERSION=2.5.*
+    - php: 7.1
+      env: SYMFONY_VERSION=2.6.*
+    - php: 7.1
+      env: SYMFONY_VERSION=2.7.*
+    - php: 7.1
+      env: SYMFONY_VERSION=2.8.*
+    - php: 7.1
+      env: SYMFONY_VERSION=3.0.*
+    - php: 7.1
+      env: SYMFONY_VERSION=3.1.*
+    - php: 7.1
+      env: SYMFONY_VERSION=3.2.*
+    - php: 7.1
+      env: SYMFONY_VERSION=3.3.*
+    - php: 7.1
+      env: SYMFONY_VERSION=3.4.*
+    - php: 7.1
+      env: SYMFONY_VERSION=3.4.*
+    - php: 7.1
+      env: SYMFONY_VERSION=4.0.*
+    - php: 7.2
+      env: SYMFONY_VERSION=3.4.*
+    - php: 7.2
+      env: SYMFONY_VERSION=2.3.*
+    - php: 7.2
+      env: SYMFONY_VERSION=2.4.*
+    - php: 7.2
+      env: SYMFONY_VERSION=2.5.*
+    - php: 7.2
+      env: SYMFONY_VERSION=2.6.*
+    - php: 7.2
+      env: SYMFONY_VERSION=2.7.*
+    - php: 7.2
+      env: SYMFONY_VERSION=2.8.*
+    - php: 7.2
+      env: SYMFONY_VERSION=3.0.*
+    - php: 7.2
+      env: SYMFONY_VERSION=3.1.*
+    - php: 7.2
+      env: SYMFONY_VERSION=3.2.*
+    - php: 7.2
+      env: SYMFONY_VERSION=3.3.*
+    - php: 7.2
+      env: SYMFONY_VERSION=3.4.*
+    - php: 7.2
+      env: SYMFONY_VERSION=3.4.*
+    - php: 7.2
+      env: SYMFONY_VERSION=4.0.*
   allow_failures:
     - php: hhvm
   fast_finish: true
 
-# Customize when the notification emails are sent.
 notifications:
+    email:
+      - xthiago@gmail.com
     on_success: never
     on_failure: always

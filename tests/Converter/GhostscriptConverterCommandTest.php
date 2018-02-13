@@ -120,6 +120,7 @@ class GhostscriptConverterCommandTest extends PHPUnit_Framework_TestCase
             array(__DIR__ . '/../files/stage/v1.5.pdf', '1.4'),
             array(__DIR__ . '/../files/stage/v1.6.pdf', '1.4'),
             array(__DIR__ . '/../files/stage/v1.7.pdf', '1.4'),
+            array(__DIR__ . '/../files/stage/v2.0.pdf', '1.4'),
         );
     }
 
