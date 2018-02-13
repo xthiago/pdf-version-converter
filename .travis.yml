@@ -1,7 +1,5 @@
-# Required to run your project under the correct environment.
 language: php
 
-# Versions of PHP you want your project run with.
 php:
   - '5.3'
   - '5.4'
@@ -9,24 +7,48 @@ php:
   - '5.6'
   - '7.0'
   - '7.1'
+  - '7.2'
   - hhvm
 
-# Commands to be run before your environment runs.
-before_script:
+env:
+  - SYMFONY_COMPONENTS_VERSION=2.3.*
+  - SYMFONY_COMPONENTS_VERSION=2.4.*
+  - SYMFONY_COMPONENTS_VERSION=2.5.*
+  - SYMFONY_COMPONENTS_VERSION=2.6.*
+  - SYMFONY_COMPONENTS_VERSION=2.7.*
+  - SYMFONY_COMPONENTS_VERSION=2.8.*
+  - SYMFONY_COMPONENTS_VERSION=3.0.*
+  - SYMFONY_COMPONENTS_VERSION=3.1.*
+  - SYMFONY_COMPONENTS_VERSION=3.2.*
+  - SYMFONY_COMPONENTS_VERSION=3.3.*
+  - SYMFONY_COMPONENTS_VERSION=3.4.*
+  - SYMFONY_COMPONENTS_VERSION=4.0.*
+
+sudo: false
+
+cache:
+  directories:
+    - $HOME/.composer/cache/files
+
+before_install:
   - composer self-update
-  - composer install --prefer-source --no-interaction --dev
+  - if [ "$SYMFONY_COMPONENTS_VERSION" != "" ]; then composer require "symfony/process:${SYMFONY_COMPONENTS_VERSION}" "symfony/filesystem:${SYMFONY_COMPONENTS_VERSION}" --no-update; fi;
 
-# Commands you want to run that will verify your build.
-script: phpunit -c tests/
+install:
+  - composer update --prefer-dist
 
-# allow_failures: Allow this build to fail under the specified environments.
-# fast_finish: If your build fails do not continue trying to build, just stop.
+script: ./vendor/bin/phpunit -c tests/
+
 matrix:
+  include:
+    - php: 5.3
+      dist: precise
   allow_failures:
     - php: hhvm
   fast_finish: true
 
-# Customize when the notification emails are sent.
 notifications:
+    email:
+      - xthiago@gmail.com
     on_success: never
     on_failure: always
