@@ -28,6 +28,10 @@ Guessing a version of PDF File:
 
 ```php
 <?php
+
+// import the composer autoloader
+require_once __DIR__.'/vendor/autoload.php'; 
+
 // import the namespaces
 use Xthiago\PDFVersionConverter\Guesser\RegexGuesser;
 // [..]
@@ -40,11 +44,14 @@ Converting file to a new PDF version:
 
 ```php
 <?php
+
+// import the composer autoloader
+require_once __DIR__.'/vendor/autoload.php'; 
+
 // import the namespaces
 use Symfony\Component\Filesystem\Filesystem,
     Xthiago\PDFVersionConverter\Converter\GhostscriptConverterCommand,
-    Xthiago\PDFVersionConverter\Converter\GhostscriptConverter
-;
+    Xthiago\PDFVersionConverter\Converter\GhostscriptConverter;
 
 // [..]
 
@@ -57,7 +64,7 @@ $converter->convert('/path/to/my/file.pdf', '1.4');
 
 ## Contributing
 
-Is really simple add new implementation of guesser or converter , just implement `GuessInterface` or `ConverterInterface`.
+Is really simple add new implementation of guesser or converter, just implement `GuessInterface` or `ConverterInterface`.
 
 ## Running unit tests
 
