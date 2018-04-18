@@ -20,17 +20,69 @@ use Symfony\Component\Process\Process;
 class GhostscriptConverterCommand
 {
     /**
-     * @var Filesystem
+     * @var string
      */
-    protected $baseCommand = 'gs -sDEVICE=pdfwrite -dCompatibilityLevel=%s -dPDFSETTINGS=/screen -dNOPAUSE -dQUIET -dBATCH -dColorConversionStrategy=/LeaveColorUnchanged -dEncodeColorImages=false -dEncodeGrayImages=false -dEncodeMonoImages=false -dDownsampleMonoImages=false -dDownsampleGrayImages=false -dDownsampleColorImages=false -dAutoFilterColorImages=false -dAutoFilterGrayImages=false -dColorImageFilter=/FlateEncode -dGrayImageFilter=/FlateEncode  -sOutputFile=%s %s';
+    protected $baseCommand = '%s -sDEVICE=pdfwrite -dCompatibilityLevel=%s -dPDFSETTINGS=/screen -dNOPAUSE -dQUIET -dBATCH -dColorConversionStrategy=/LeaveColorUnchanged -dEncodeColorImages=false -dEncodeGrayImages=false -dEncodeMonoImages=false -dDownsampleMonoImages=false -dDownsampleGrayImages=false -dDownsampleColorImages=false -dAutoFilterColorImages=false -dAutoFilterGrayImages=false -dColorImageFilter=/FlateEncode -dGrayImageFilter=/FlateEncode  -sOutputFile=%s %s';
 
     public function __construct()
     {
     }
 
+    public function setExecutable($executable)
+    {
+        $this->executable = $executable;
+    }
+
+    private function getExecutable()
+    {
+        return $this->executable ?: $this->getExecutableByOS();
+    }
+
+    private function getExecutableByOS()
+    {
+        $os = PHP_OS;
+
+        $executablesByOS = [
+            'WINNT' => [
+                '32' => 'gswin32c',
+                '64' => 'gswin64c'
+            ],
+            'LINUX' => [
+                'i686' => 'gs',
+                'x86_64' => 'gs'
+            ],
+        ];
+
+        if ($os === 'WINNT') {
+            $out = [];
+            exec("wmic cpu get DataWidth", $out);
+            $bits = strstr(implode("", $out), "64") ? 64 : 32;
+            $architecture = $bits;
+        } else {
+            $architecture = shell_exec('arch');
+        }
+
+        $executable = $executablesByOS[$os][$architecture];
+        
+        if (!$this->checkExecutableExists($executable)) {
+            throw new Exception("Cannot determine GhostScript exe");
+        }
+
+        return $executable;        
+    }
+
+    private function checkExecutableExists($executable)
+    {
+        if (!shell_exec('which ' . $executable)) {
+            return false;
+        }
+
+        return true;
+    }
+
     public function run($originalFile, $newFile, $newVersion)
     {
-        $command = sprintf($this->baseCommand, $newVersion, $newFile, escapeshellarg($originalFile));
+        $command = sprintf($this->baseCommand, $this->getExecutable(), $newVersion, $newFile, escapeshellarg($originalFile));
 
         $process = new Process($command);
         $process->run();
