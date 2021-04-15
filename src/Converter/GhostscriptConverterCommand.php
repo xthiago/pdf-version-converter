@@ -37,7 +37,8 @@ class GhostscriptConverterCommand
     {
         $command = sprintf($this->baseCommand, $newVersion, $newFile, escapeshellarg($originalFile));
 
-        $process = new Process($command);
+        $process = Process::fromShellCommandline($command);
+
         $process->run();
 
         if (!$process->isSuccessful()) {
