@@ -30,15 +30,16 @@ class GhostscriptConverterCommand
     public function __construct($customFlags = null)
     {
         $this->baseCommand .= $customFlags ?? $this->defaultFlags;
-        $this->baseCommand .= ' -o %s %s';
+        $this->baseCommand .= ' -o %s $SOURCE_PDF';
     }
 
     public function run($originalFile, $newFile, $newVersion)
     {
-        $command = sprintf($this->baseCommand, $newVersion, $newFile, escapeshellarg($originalFile));
+        $command = sprintf($this->baseCommand, $newVersion, $newFile);
 
-        $process = new Process($command);
-        $process->run();
+        $process = Process::fromShellCommandline($command);
+
+        $process->run(null, ['SOURCE_PDF' => $originalFile]);
 
         if (!$process->isSuccessful()) {
             throw new \RuntimeException($process->getErrorOutput());

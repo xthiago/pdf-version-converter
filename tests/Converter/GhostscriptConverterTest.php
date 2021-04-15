@@ -10,28 +10,29 @@
  */
 namespace Xthiago\PDFVersionConverter\Converter;
 
-use \PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
+
 use Prophecy\Argument;
-use Symfony\Component\Filesystem\Filesystem;
+use Prophecy\PhpUnit\ProphecyTrait;
 
 /**
  * @author Thiago Rodrigues <xthiago@gmail.com>
  */
-class GhostscriptConverterTest extends PHPUnit_Framework_TestCase
+class GhostscriptConverterTest extends TestCase
 {
+    use ProphecyTrait;
+
     protected $tmp;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->tmp = __DIR__.'/../files/stage/';
 
-        if (!file_exists($this->tmp))
+        if (!file_exists($this->tmp)) {
             mkdir($this->tmp);
+        }
     }
 
-    protected function tearDown()
-    {
-    }
 
     /**
      * @param string $file
@@ -47,20 +48,20 @@ class GhostscriptConverterTest extends PHPUnit_Framework_TestCase
            ->shouldBeCalled()
         ;
         $fs->copy(
-                Argument::type('string'),
-                $file,
-                true
-            )
+            Argument::type('string'),
+            $file,
+            true
+        )
             ->willReturn(true)
             ->shouldBeCalled()
         ;
 
         $command = $this->prophesize('Xthiago\PDFVersionConverter\Converter\GhostscriptConverterCommand');
         $command->run(
-                $file,
-                Argument::type('string'),
-                $newVersion
-            )
+            $file,
+            Argument::type('string'),
+            $newVersion
+        )
             ->willReturn(null)
             ->shouldBeCalled()
         ;
