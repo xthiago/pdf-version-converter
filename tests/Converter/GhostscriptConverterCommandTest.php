@@ -10,13 +10,14 @@
  */
 namespace Xthiago\PDFVersionConverter\Converter;
 
-use \PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
+use RuntimeException;
 use Xthiago\PDFVersionConverter\Guesser\RegexGuesser;
 
 /**
  * @author Thiago Rodrigues <xthiago@gmail.com>
  */
-class GhostscriptConverterCommandTest extends PHPUnit_Framework_TestCase
+class GhostscriptConverterCommandTest extends TestCase
 {
     protected $tmp;
 
@@ -34,27 +35,29 @@ class GhostscriptConverterCommandTest extends PHPUnit_Framework_TestCase
         'v2.0.pdf',
     );
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->tmp = __DIR__.'/../files/stage/';
 
-        if (!file_exists($this->tmp))
+        if (!file_exists($this->tmp)) {
             mkdir($this->tmp);
+        }
 
         $this->copyFilesToStageArea();
     }
 
     protected function copyFilesToStageArea()
     {
-        foreach($this->files as $file) {
-            if (!copy(__DIR__.'/../files/repo/'. $file, $this->tmp . $file))
+        foreach ($this->files as $file) {
+            if (!copy(__DIR__.'/../files/repo/'. $file, $this->tmp . $file)) {
                 throw new \RuntimeException("Can't create test file.");
+            }
         }
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
-        foreach($this->files as $file) {
+        foreach ($this->files as $file) {
             unlink($this->tmp . $file);
         }
     }
@@ -87,23 +90,18 @@ class GhostscriptConverterCommandTest extends PHPUnit_Framework_TestCase
      * @param $newVersion
      *
      * @dataProvider invalidFilesProvider
-     * @expectedException RuntimeException
      */
     public function testMustThrowException($invalidFile, $newVersion)
     {
         $tmpFile = $this->tmp .'/'. uniqid('pdf_version_changer_test_') . '.pdf';
 
         $command = new GhostscriptConverterCommand();
+        $this->expectException(RuntimeException::class);
         $command->run(
             $invalidFile,
             $tmpFile,
             $newVersion
         );
-
-        $guesser = new RegexGuesser();
-        $version = $guesser->guess($tmpFile);
-
-        $this->assertEquals($version, $newVersion);
     }
 
     /**

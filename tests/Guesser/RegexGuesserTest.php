@@ -10,12 +10,13 @@
  */
 namespace Xthiago\PDFVersionConverter\Guesser;
 
-use \PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
+use RuntimeException;
 
 /**
  * @author Thiago Rodrigues <xthiago@gmail.com>
  */
-class RegexGuesserTest extends PHPUnit_Framework_TestCase
+class RegexGuesserTest extends TestCase
 {
     protected static $files = array(
         'text',
@@ -35,23 +36,25 @@ class RegexGuesserTest extends PHPUnit_Framework_TestCase
 
     protected $stageDir;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->tmpDir = __DIR__.'/../files/repo/';
         $this->stageDir = __DIR__.'/../files/stage/';
 
-        if (!file_exists($this->stageDir))
+        if (!file_exists($this->stageDir)) {
             mkdir($this->stageDir);
+        }
 
-        foreach(self::$files as $file) {
-            if (!copy($this->tmpDir . $file, $this->stageDir . $file))
+        foreach (self::$files as $file) {
+            if (!copy($this->tmpDir . $file, $this->stageDir . $file)) {
                 throw new \RuntimeException("Can't create test file.");
+            }
         }
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
-        foreach(self::$files as $file) {
+        foreach (self::$files as $file) {
             unlink($this->stageDir . $file);
         }
     }
@@ -74,11 +77,11 @@ class RegexGuesserTest extends PHPUnit_Framework_TestCase
      * @param string $file
      *
      * @dataProvider invalidFilesProvider
-     * @expectedException RuntimeException
      */
     public function testMustThrowException($file)
     {
         $guesser = new RegexGuesser();
+        $this->expectException(RuntimeException::class);
         $version = $guesser->guess($file);
     }
 
