@@ -70,6 +70,6 @@ class GhostscriptConverter implements ConverterInterface
 
         $this->fs->copy($tmpFile, $file, true);
         
-        $this->fs->delete($tmpFile);
+        $this->fs->remove($tmpFile);
     }
 }
