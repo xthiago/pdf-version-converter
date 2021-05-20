@@ -69,5 +69,7 @@ class GhostscriptConverter implements ConverterInterface
             throw new \RuntimeException("The generated file '{$tmpFile}' was not found.");
 
         $this->fs->copy($tmpFile, $file, true);
+        
+        $this->fs->remove($tmpFile);
     }
 }
