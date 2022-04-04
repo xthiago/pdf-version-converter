@@ -232,7 +232,7 @@
         },
         {
             "name": "symfony/process",
-            "version": "v5.2.4",
+            "version": "v6.05",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/process.git",
